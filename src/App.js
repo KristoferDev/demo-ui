@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import Admin from './components/admin/Admin';
+import Routes from "./Routes";
 
 function App() {
   return (
     <div className="App">
-      <Admin />
-      <h1>Hello World!</h1>
+      <Routes />
     </div>
   );
 }
