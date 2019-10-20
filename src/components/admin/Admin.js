@@ -3,24 +3,24 @@ import React, { useState, useEffect } from 'react';
 const Admin = props => {
   const [leaderState, setLeader] = useState([]);
   const [createLeader, setCreateLeader] = useState();
-  const [url, setUrl] = useState('http://localhost:5000/api/partyleader');
+
   const fetchLeader = () => {
     fetch(`http://localhost:5000/api/partyleader`)
       .then(result => result.json())
       .then(data => setLeader(data))
       .catch(error => console.log(error));
   };
-
-  const postLeader = () => {
-    fetch(`http://localhost:5000/api/partyleader?query=${createLeader}`, {
-      method: 'post',
-      body: JSON.stringify()
-    })
-      .then(response => response.json())
-      .then(data => setLeader(data))
-      .catch(error => console.log(error));
-  };
-
+  /*
+    const postLeader = () => {
+      fetch(`http://localhost:5000/api/partyleader?query=${createLeader}`, {
+        method: 'post',
+        body: JSON.stringify()
+      })
+        .then(response => response.json())
+        .then(data => setLeader(data))
+        .catch(error => console.log(error));
+    };
+  */
   useEffect(() => {
     fetchLeader()
   }, [createLeader]);
@@ -31,7 +31,6 @@ const Admin = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setUrl()
   }
 
   return (
@@ -40,9 +39,9 @@ const Admin = props => {
       <form onSubmit={handleSubmit}>
         {leaderState.map((n, i) => (
           <>
-            <input key={i} type="text" value={createLeader} onChange={handleChange} />
-            <input key={i} type="text" value={createLeader} onChange={handleChange} />
-            <input key={i} type="text" value={createLeader} onChange={handleChange} />
+            <input key={n + i} type="text" value={createLeader} onChange={handleChange} />
+            <input key={n + i} type="text" value={createLeader} onChange={handleChange} />
+            <input key={n + i} type="text" value={createLeader} onChange={handleChange} />
             <br />
           </>
         ))}

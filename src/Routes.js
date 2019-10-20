@@ -9,11 +9,13 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Nav />
-      <Switch>
-        <Route path="/question" component={Question} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/admin" component={Admin} />
-      </Switch>
+      <div className="content">
+        <Switch>
+          <Route path="/question" component={Question} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/admin" component={Admin} />
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 };
