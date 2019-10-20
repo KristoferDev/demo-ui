@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import './nav.scss';
 
 const Nav = () => (
-  <div>
+  <div className="nav">
     <ul>
       <li>
         <Link className="nav-link" to="/question">Questions</Link>
