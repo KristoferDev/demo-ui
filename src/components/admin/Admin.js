@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Admin.scss';
 
 const Admin = props => {
   const [leaderState, setLeader] = useState([]);
@@ -35,7 +36,7 @@ const Admin = props => {
 
   return (
     <div className="admin">
-      <h1>This is admin</h1>
+      <h1>Partiledare</h1>
       <form onSubmit={handleSubmit}>
         {leaderState.map((n, i) => (
           <>
