@@ -1,64 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import './Admin.scss';
+import { createLeader } from './apiAdmin';
 
-const Admin = props => {
-  const [leaderState, setLeader] = useState([]);
-  const [createLeader, setCreateLeader] = useState();
+const Admin = () => {
+  const [values, setValue] = useState("");
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const fetchLeader = () => {
-    fetch(`http://localhost:5000/api/partyleader`)
-      .then(result => result.json())
-      .then(data => setLeader(data))
-      .catch(error => console.log(error));
-  };
-  /*
-    const postLeader = () => {
-      fetch(`http://localhost:5000/api/partyleader?query=${createLeader}`, {
-        method: 'post',
-        body: JSON.stringify()
-      })
-        .then(response => response.json())
-        .then(data => setLeader(data))
-        .catch(error => console.log(error));
-    };
-  */
-  useEffect(() => {
-    fetchLeader()
-  }, [createLeader]);
-
-  const handleChange = (e) => {
-    setCreateLeader(e.target.value)
+  const handleChange = e => {
+    setError('')
+    setName(e.target.name)
+    setAge(e.target.age)
+    setLiving(e.target.living)
   }
 
-  const handleSubmit = e => {
+  const clickSubmit = e => {
     e.preventDefault();
+    setError('')
+    setSuccess(false)
+    createLeader({ name, age, living }).then(data => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setError('');
+        setSuccess(true);
+      }
+    });
+  };
+
+  const showSuccess = () => {
+    if (success) {
+      return <h3 className="success">Partiledare skapad</h3>
+    }
+  }
+
+
+  const showError = () => {
+    if (error) {
+      return <h3 className="danger">Partiledare ska vara uniq</h3>
+    }
   }
 
   return (
-    <div className="admin">
-      <h1>Partiledare</h1>
-      <form onSubmit={handleSubmit}>
-        {leaderState.map((n, i) => (
-          <>
-            <input key={n + i} type="text" value={createLeader} onChange={handleChange} />
-            <input key={n + i} type="text" value={createLeader} onChange={handleChange} />
-            <input key={n + i} type="text" value={createLeader} onChange={handleChange} />
-            <br />
-          </>
-        ))}
-        <button>Post</button>
-      </form>
-    </div>
+    <form onSubmit={clickSubmit}>
+      {showSuccess}
+      {showError}
+      <input type="text" onChange={handleChange} value={name} autoFocus />
+      <input type="text" onChange={handleChange} value={age} autoFocus />
+      <input type="text" onChange={handleChange} value={living} autoFocus />
+      <button>Skicka</button>
+    </form>
   )
-};
+}
 
 export default Admin;
-
-/*
-      <label>Name: </label><input value={leaderState.profileLeader.name} />
-      <label>Age: </label><input value={leaderState.profileLeader.age} />
-      <label>Living: </label><input value={leaderState.profileLeader.living} />
-            {leaderState.map((n, i) => (
-        <h1 key={i}>{n.name}</h1>
-      ))}
-*/

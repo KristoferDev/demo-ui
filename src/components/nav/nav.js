@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './nav.scss';
-import { is } from '@babel/types';
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
