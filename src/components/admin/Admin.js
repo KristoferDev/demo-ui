@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createLeader } from './apiAdmin';
 
 const Admin = () => {
-  const [values, setValue] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setError('')
-    setName(e.target.name)
-    setAge(e.target.age)
-    setLiving(e.target.living)
+    setName(e.target.value)
   }
 
-  const clickSubmit = e => {
+  const clickSubmit = (e) => {
     e.preventDefault();
     setError('')
     setSuccess(false)
-    createLeader({ name, age, living }).then(data => {
+    createLeader(e).then(data => {
       if (data.error) {
         setError(data.error);
       } else {
@@ -33,7 +31,6 @@ const Admin = () => {
     }
   }
 
-
   const showError = () => {
     if (error) {
       return <h3 className="danger">Partiledare ska vara uniq</h3>
@@ -45,8 +42,6 @@ const Admin = () => {
       {showSuccess}
       {showError}
       <input type="text" onChange={handleChange} value={name} autoFocus />
-      <input type="text" onChange={handleChange} value={age} autoFocus />
-      <input type="text" onChange={handleChange} value={living} autoFocus />
       <button>Skicka</button>
     </form>
   )
