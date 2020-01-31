@@ -14,10 +14,10 @@ const Nav = ({ history }) => (
   <div className="nav">
     <ul>
       <li>
-        <Link style={isActive(history, "/question")} className="nav-link" to="/question">Questions</Link>
+        <Link style={isActive(history, "/question")} className="nav-link" to="/question">Frågor</Link>
       </li>
       <li>
-        <Link style={isActive(history, '/profile')} className="nav-link" to="/profile">Profile</Link>
+        <Link style={isActive(history, '/profile')} className="nav-link" to="/profile">Profil</Link>
       </li>
       <li>
         <Link style={isActive(history, '/admin')} className="nav-link" to="/admin">Admin</Link>
